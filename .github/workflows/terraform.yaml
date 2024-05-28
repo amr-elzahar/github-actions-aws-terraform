@@ -27,8 +27,6 @@ jobs:
           aws s3api create-bucket \
           --bucket ${{ env.BUCKET_NAME }} \
           --region ${{ env.AWS_REGION }} \
-          --create-bucket-configuration \
-          LocationConstraint=${{ env.AWS_REGION }}
       - name: Enable S3 Bucket Versioning
         run: |
           aws s3api put-bucket-versioning \
@@ -39,8 +37,7 @@ jobs:
           aws dynamodb create-table \
           --table-name ${{ env.DYNAMODB_TABLE_NAME }} \
           --attribute-definitions AttributeName=LockID,AttributeType=S \
-          --key-schema AttributeName=LockID,KeyType=HASH \
-          --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+          --key-schema AttributeName=LockID,KeyType=HASH 
           --region ${{ env.AWS_REGION }}
 
       # - name: Checkout Code
