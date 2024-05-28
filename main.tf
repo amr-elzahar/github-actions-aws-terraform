@@ -4,8 +4,9 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "github-actions-terraform-state-bucket"
+    bucket = "github-actions-terraform-state-bucket-2024"
     key    = "terraform-state-file"
+    dynamodb_table = "terraform-state-file-table-2024"
     region = "us-east-1"
   }
 }

@@ -1,7 +1,6 @@
 name: AWS Terraform Workflow
 on:
   workflow_dispatch:
-  push:
 
 permissions:
   id-token: write
@@ -9,8 +8,6 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  BUCKET_NAME: github-actions-terraform-state-bucket-2024
-  DYNAMODB_TABLE_NAME: terraform-state-file-table
 
 jobs:
   aws-terraform:
@@ -22,32 +19,14 @@ jobs:
           audience: sts.amazonaws.com
           role-to-assume: arn:aws:iam::224732705809:role/github-actions-terraform
           aws-region: ${{ env.AWS_REGION }}
-      - name: Create S3 Bucket
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Intialize Terraform
         run: |
-          aws s3api create-bucket \
-          --bucket ${{ env.BUCKET_NAME }} \
-          --region ${{ env.AWS_REGION }} \
-      - name: Enable S3 Bucket Versioning
+          terraform init
+      - name: Plan Terraform Config File
         run: |
-          aws s3api put-bucket-versioning \
-          --bucket ${{ env.BUCKET_NAME }} \
-          --versioning-configuration Status=Enabled
-      - name: Create DynamoDB Table
-        run: |
-          aws dynamodb create-table \
-          --table-name ${{ env.DYNAMODB_TABLE_NAME }} \
-          --attribute-definitions AttributeName=LockID,AttributeType=S \
-          --key-schema AttributeName=LockID,KeyType=HASH 
-          --region ${{ env.AWS_REGION }}
-
-      # - name: Checkout Code
-      #   uses: actions/checkout@v4
-      # - name: Intialize Terraform
-      #   run: |
-      #     terraform init
-      # - name: Plan Terraform Config File
-      #   run: |
-      #     terraform plan
+          terraform plan
       # - name: Apply Terraform Config File
       #   run: |
       #     terraform apply -auto-approve
