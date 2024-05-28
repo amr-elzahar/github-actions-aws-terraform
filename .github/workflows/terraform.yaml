@@ -9,7 +9,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  BUCKET_NAME: github-actions-terraform-state-bucket
+  BUCKET_NAME: github-actions-terraform-state-bucket-2024
   DYNAMODB_TABLE_NAME: terraform-state-file-table
 
 jobs:
