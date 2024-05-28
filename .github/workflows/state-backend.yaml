@@ -2,6 +2,10 @@ name: Terraform State Backend
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   AWS_REGION: us-east-1
   BUCKET_NAME: github-actions-terraform-state-bucket-2024
