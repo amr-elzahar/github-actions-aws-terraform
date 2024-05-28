@@ -1,0 +1,26 @@
+name: AWS Terraform Cleanup Workflow
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  aws-terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AuthN Agains AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          role-to-assume: arn:aws:iam::224732705809:role/github-actions-terraform
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Terraform Destroy
+        run: |
+          terraform destroy -auto-approve
