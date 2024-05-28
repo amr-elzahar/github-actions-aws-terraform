@@ -23,7 +23,12 @@ jobs:
 
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Run Terraform Config File
+      - name: Intialize Terraform
         run: |
           terraform init
+      - name: Plan Terraform Config File
+        run: |
           terraform plan
+      # - name: Apply Terraform Config File
+      #   run: |
+      #     terraform apply -auto-approve
