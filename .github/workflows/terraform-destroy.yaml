@@ -21,6 +21,9 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Checkout Code
         uses: actions/checkout@v4
+      - name: Intialize Terraform
+        run: |
+          terraform init
       - name: Terraform Destroy
         run: |
           terraform destroy -auto-approve
