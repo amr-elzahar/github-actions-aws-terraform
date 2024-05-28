@@ -2,6 +2,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "github-actions-terraform-state-bucket"
+    key    = "terraform-state-file"
+    region = "us-east-1"
+  }
+}
+
+
 resource "aws_vpc" "demo-vpc" {
   cidr_block = "10.20.0.0/16"
   
