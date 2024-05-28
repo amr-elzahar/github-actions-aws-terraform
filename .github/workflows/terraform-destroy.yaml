@@ -10,10 +10,10 @@ env:
   AWS_REGION: us-east-1
 
 jobs:
-  aws-terraform:
+  aws-terraform-destroy:
     runs-on: ubuntu-latest
     steps:
-      - name: AuthN Agains AWS
+      - name: AuthN Against AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com

@@ -15,7 +15,7 @@ jobs:
   aws-backend-terraform-state:
     runs-on: ubuntu-latest
     steps:
-      - name: AuthN Agains AWS
+      - name: AuthN Against AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
