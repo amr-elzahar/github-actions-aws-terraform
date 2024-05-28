@@ -27,6 +27,6 @@ jobs:
       - name: Plan Terraform Config File
         run: |
           terraform plan
-      # - name: Apply Terraform Config File
-      #   run: |
-      #     terraform apply -auto-approve
+      - name: Apply Terraform Config File
+        run: |
+          terraform apply -auto-approve
